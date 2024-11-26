@@ -69,8 +69,11 @@
 <!-- Layar Awal -->
 <div id="start-screen">
   <h1>Buka ini olip</h1>
-  <button id="start-button">Lanjutkan</button>
+  <button id="start-button">Play Musik</button>
 </div>
+
+<!-- Audio -->
+<audio id="background-music" src="lagu.mp3"></audio>
 
 <!-- Konten Utama -->
 <div id="main-content">
@@ -181,8 +184,6 @@
   <!-- Tambahkan elemen bubble lainnya di sini -->
 </div>
 
-<!-- Musik -->
-<audio id="background-music" src="musik.mp3" preload="auto"></audio>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/pathseg@1.2.1/pathseg.min.js'></script>
@@ -190,18 +191,20 @@
     
 
 <script>
+  // Ambil elemen audio dan tombol
   const startButton = document.getElementById('start-button');
-  const startScreen = document.getElementById('start-screen');
-  const mainContent = document.getElementById('main-content');
   const backgroundMusic = document.getElementById('background-music');
 
+  // Tambahkan event listener untuk tombol
   startButton.addEventListener('click', () => {
-    // Sembunyikan layar awal
-    startScreen.style.display = 'none';
-    // Tampilkan konten utama
-    mainContent.style.display = 'block';
-    // Mulai memutar musik
-    backgroundMusic.play();
+    // Cek jika musik belum dimainkan
+    if (backgroundMusic.paused) {
+      backgroundMusic.play();
+      startButton.textContent = "Pause Musik"; // Ubah teks tombol
+    } else {
+      backgroundMusic.pause();
+      startButton.textContent = "Play Musik"; // Kembali ke teks awal
+    }
   });
 </script>
 
